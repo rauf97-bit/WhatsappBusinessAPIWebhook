@@ -1,7 +1,5 @@
 # WhatsappBusinessAPIWebhook
 
-# WhatsappBusinessAPIWebhook
-
 This project implements a webhook server for the **WhatsApp Business Cloud API**.  
 It handles **incoming messages** and **status updates** from WhatsApp, processes them, and can respond with automated or custom replies.
 
