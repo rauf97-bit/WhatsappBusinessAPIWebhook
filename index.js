@@ -13,7 +13,7 @@ const verifyToken = process.env.WHATSAPP_VERIFY_TOKEN;
 
 
 // Route for GET requests
-app.get('/webhooks', (req, res) => {
+app.get('/webhook', (req, res) => {
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
