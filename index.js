@@ -20,7 +20,7 @@ app.get('/webhooks', (req, res) => {
 
     if (mode && token) {
         console.log(token, verifyToken);
-        console.log(mode));
+        console.log(mode);
         
         
         if (mode === 'subscribe' && token === verifyToken) {
