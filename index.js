@@ -32,7 +32,7 @@ console.log(token,mode,verifyToken);
 //   res.status(200).end();
 // });
 
-app.post("/webhook", (req, res) => {
+app.post('/', (req, res) => {
   const body = req.body;
 
   if (body.object === "whatsapp_business_account") {
@@ -79,6 +79,8 @@ app.post("/webhook", (req, res) => {
     res.sendStatus(404);
   }
 });
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`\nListening on port ${port}\n`);
