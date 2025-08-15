@@ -1,27 +1,31 @@
-// Import Express.js
-const express = require('express');
 
-// Create an Express app
+require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
 
 // Middleware to parse JSON bodies
-app.use(express.json());
-
+app.use(bodyParser.json());
 // Set port and verify_token
-const port = process.env.PORT || 3000;
-const verifyToken = process.env.VERIFY_TOKEN;
+const port = process.env.PORT;
+const verifyToken = process.env.WHATSAPP_VERIFY_TOKEN;
+
 
 // Route for GET requests
-app.get('/webhook', (req, res) => {
-  const { 'hub.mode': mode, 'hub.challenge': challenge, 'hub.verify_token': token } = req.query;
-console.log(token,mode,verifyToken);
+app.get('/webhooks', (req, res) => {
+    const mode = req.query['hub.mode'];
+    const token = req.query['hub.verify_token'];
+    const challenge = req.query['hub.challenge'];
 
-  if (mode === 'subscribe' && token === verifyToken) {
-    console.log('WEBHOOK VERIFIED');
-    res.status(200).send(challenge);
-  } else {
-    res.status(403).end();
-  }
+    if (mode && token) {
+        if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+            console.log("Webhook verified");
+            res.status(200).send(challenge);
+        } else {
+            res.sendStatus(403);
+        }
+    }
 });
 
 // Route for POST requests
@@ -32,7 +36,7 @@ console.log(token,mode,verifyToken);
 //   res.status(200).end();
 // });
 
-app.post('/', (req, res) => {
+app.post('/webhook', (req, res) => {
   const body = req.body;
 
   if (body.object === "whatsapp_business_account") {
